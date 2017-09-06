@@ -1,7 +1,7 @@
 require File.expand_path('../helper', __FILE__)
 
-module Librato::Services
-  class WebhookTest < Librato::Services::TestCase
+module AppOptics::Services
+  class WebhookTest < AppOptics::Services::TestCase
     def setup
       @stubs = Faraday::Adapter::Test::Stubs.new
     end
@@ -95,7 +95,7 @@ module Librato::Services
     end
 
     def service(*args)
-      super Librato::Services::Service::Webhook, *args
+      super AppOptics::Services::Service::Webhook, *args
     end
   end
 end

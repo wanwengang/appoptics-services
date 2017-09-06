@@ -1,6 +1,6 @@
 require File.expand_path('../helper', __FILE__)
 
-class CampfireTest < Librato::Services::TestCase
+class CampfireTest < AppOptics::Services::TestCase
   class MockCampfire
     class Room
       attr_reader :name, :lines, :pastes
@@ -87,7 +87,7 @@ class CampfireTest < Librato::Services::TestCase
   end
 
   def service(*args)
-    super Librato::Services::Service::Campfire, *args
+    super AppOptics::Services::Service::Campfire, *args
   end
 end
 

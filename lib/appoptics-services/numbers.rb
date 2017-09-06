@@ -1,4 +1,4 @@
-module Librato
+module AppOptics
   module Services
     class Numbers
       def self.format_for_threshold(threshold, number, tolerance=2)

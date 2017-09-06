@@ -1,7 +1,7 @@
 require File.expand_path('../helper', __FILE__)
 
-module Librato::Services
-  class PagerdutyTest < Librato::Services::TestCase
+module AppOptics::Services
+  class PagerdutyTest < AppOptics::Services::TestCase
     def setup
       @stubs = Faraday::Adapter::Test::Stubs.new
     end
@@ -129,7 +129,7 @@ module Librato::Services
     end
 
     def service(*args)
-      super Librato::Services::Service::Pagerduty, *args
+      super AppOptics::Services::Service::Pagerduty, *args
     end
   end
 end

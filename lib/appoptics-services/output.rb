@@ -7,7 +7,7 @@ require_relative 'numbers'
 # TODO
 # This has grown to the point where it may be worth generating an Alert
 # object that is pushed into a set of templates for HTML, Markdown, Slack, etc.
-module Librato
+module AppOptics
   module Services
     class Output
       include Helpers::AlertHelpers
@@ -118,7 +118,7 @@ module Librato
         else
           threshold_value = condition[:threshold]
           actual_value = measurement[:value]
-          formatted_value = Librato::Services::Numbers.format_for_threshold(threshold_value, actual_value)
+          formatted_value = AppOptics::Services::Numbers.format_for_threshold(threshold_value, actual_value)
           "#{condition[:type]} threshold #{threshold(condition,measurement)} with value #{formatted_value}"
         end
       end

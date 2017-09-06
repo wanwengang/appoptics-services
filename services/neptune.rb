@@ -4,8 +4,8 @@ require 'cgi'
 require 'faraday'
 require 'yajl'
 
-module Librato::Services
-  class Service::Neptune < Librato::Services::Service
+module AppOptics::Services
+  class Service::Neptune < AppOptics::Services::Service
     def receive_validate(errors = {})
       # Only api_key is required.
       if settings[:api_key].to_s.empty?
@@ -64,7 +64,7 @@ module Librato::Services
 
     def send_alert(body)
       api_key = settings[:api_key].to_s
-      url = "https://www.neptune.io/api/v1/trigger/channel/librato/#{api_key}"
+      url = "https://www.neptune.io/api/v1/trigger/channel/appoptics/#{api_key}"
       begin
         http_post(url, {:payload => Yajl::Encoder.encode(body)}, headers)
       rescue Faraday::Error::ConnectionFailed

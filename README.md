@@ -1,9 +1,9 @@
-Librato Services
+AppOptics Services
 ================
 
-[![Build Status](https://secure.travis-ci.org/librato/librato-services.png)](http://travis-ci.org/librato/librato-services)
+[![Build Status](https://secure.travis-ci.org/appoptics/appoptics-services.png)](http://travis-ci.org/appoptics/appoptics-services)
 
-Service hooks for [Librato Metrics](https://metrics.librato.com).
+Service hooks for [AppOptics Metrics](https://metrics.appoptics.com).
 
 Service Lifecycle
 -----------------
@@ -24,7 +24,7 @@ Service Lifecycle
    the post data:
    - `params[:settings]`: the options the user specified in the Service configuration
    - `params[:payload]`: the event data for the triggered alert
-1. A [sinatra][] app [lib/librato_services/app.rb][] decodes the request
+1. A [sinatra][] app [lib/appoptics_services/app.rb][] decodes the request
    and dispatches it to a registered service if it exists
 
 Writing a Service
@@ -43,7 +43,7 @@ Payload for a Triggered Alert
 -----------------------------
 
 A sample payload is available at
-[lib/librato-services/helpers/alert_helpers.rb] and listed below:
+[lib/appoptics-services/helpers/alert_helpers.rb] and listed below:
 
 ```
 "payload" : {
@@ -114,7 +114,7 @@ Contributing
 
 Once you've made your great commits:
 
-1. [Fork][fk] `librato_services`
+1. [Fork][fk] `appoptics_services`
 2. Create a topic branch — `git checkout -b my_branch`
 3. Commit the changes without changing the Rakefile or other files unrelated to your enhancement.
 4. Push to your branch — `git push origin my_branch`
@@ -132,12 +132,12 @@ can be accomplished with community involvement.
 
 We thank them for everything they've done for all of us.
 
-[lib/librato_services/app.rb]: https://github.com/librato/librato-services/blob/master/lib/librato_services/app.rb
-[services/]: https://github.com/librato/librato-services/tree/master/services
-[test/]: https://github.com/librato/librato-services/tree/master/test
+[lib/appoptics_services/app.rb]: https://github.com/appoptics/appoptics-services/blob/master/lib/appoptics_services/app.rb
+[services/]: https://github.com/appoptics/appoptics-services/tree/master/services
+[test/]: https://github.com/appoptics/appoptics-services/tree/master/test
 [github-services]: https://github.com/github/github-services/
 [papertrail-services]: https://github.com/papertrail/papertrail-services/
 [sinatra]: http://www.sinatrarb.com/
 [fk]: http://help.github.com/forking/
-[is]: https://github.com/librato/librato_services/issues/
-[Librato]: http://librato.com/
+[is]: https://github.com/appoptics/appoptics_services/issues/
+[AppOptics]: http://appoptics.com/

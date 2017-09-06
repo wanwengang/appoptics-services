@@ -1,4 +1,4 @@
-module Librato
+module AppOptics
   module Services
     module Authentication
       def abort(code, type, errors)
@@ -12,7 +12,7 @@ module Librato
       end
 
       def unauthorized!
-        headers "WWW-Authenticate" => %(Basic Realm="Librato Services")
+        headers "WWW-Authenticate" => %(Basic Realm="AppOptics Services")
         abort(401, :request, "Authorization Required")
       end
 

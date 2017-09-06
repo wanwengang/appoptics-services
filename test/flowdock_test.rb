@@ -1,6 +1,6 @@
 require File.expand_path('../helper', __FILE__)
 
-class FlowdockTest < Librato::Services::TestCase
+class FlowdockTest < AppOptics::Services::TestCase
   class MockFlowdock
     attr_reader :chats, :inbox
 
@@ -22,7 +22,7 @@ class FlowdockTest < Librato::Services::TestCase
     svc = service(:alert, {"api_token" => "t", "user_name" => "Test"}.with_indifferent_access, new_alert_payload)
     svc.flowdock = MockFlowdock.new
     svc.receive_alert
-    output = Librato::Services::Output.new(new_alert_payload)
+    output = AppOptics::Services::Output.new(new_alert_payload)
 
     assert_equal 0, svc.flowdock.chats.count
     assert_equal 1, svc.flowdock.inbox.count
@@ -62,7 +62,7 @@ class FlowdockTest < Librato::Services::TestCase
   end
 
   def service(*args)
-    super Librato::Services::Service::Flowdock, *args
+    super AppOptics::Services::Service::Flowdock, *args
   end
 end
 

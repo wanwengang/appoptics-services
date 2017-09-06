@@ -1,8 +1,8 @@
 require File.expand_path('../helper', __FILE__)
 require 'timeout'
 
-module Librato::Services
-  class HipchatTest < Librato::Services::TestCase
+module AppOptics::Services
+  class HipchatTest < AppOptics::Services::TestCase
     def setup
       @settings = { auth_token: "token", from: "who", room_id: "the_room", notify: "1" }
     end
@@ -136,7 +136,7 @@ module Librato::Services
     end
 
     def service(*args)
-      super Librato::Services::Service::Hipchat, *args
+      super AppOptics::Services::Service::Hipchat, *args
     end
   end
 end

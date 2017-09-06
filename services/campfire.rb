@@ -2,8 +2,8 @@
 
 require 'tinder'
 
-module Librato::Services
-  class Service::Campfire < Librato::Services::Service
+module AppOptics::Services
+  class Service::Campfire < AppOptics::Services::Service
     attr_writer :campfire
 
     def receive_validate(errors = {})
@@ -47,7 +47,7 @@ module Librato::Services
     end
 
     def receive_alert_clear
-      output = Librato::Services::Output.new(payload)
+      output = AppOptics::Services::Output.new(payload)
       paste_message output.markdown
     end
 
@@ -56,7 +56,7 @@ module Librato::Services
 
       # New-style alerts
       if payload[:alert][:version] == 2
-        output = Librato::Services::Output.new(payload)
+        output = AppOptics::Services::Output.new(payload)
         paste_message output.markdown
         return
       end

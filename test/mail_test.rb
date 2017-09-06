@@ -1,7 +1,7 @@
 require File.expand_path('../helper', __FILE__)
 
-module Librato::Services
-  class MailTest < Librato::Services::TestCase
+module AppOptics::Services
+  class MailTest < AppOptics::Services::TestCase
     def setup
 
     end
@@ -68,24 +68,24 @@ module Librato::Services
     def test_mail_message_alert
       svc = service(:alert, { :addresses => 'fred@barn.com' }, alert_payload)
       message = svc.mail_message
-      assert_equal "[Librato] Alert  has triggered!", message.subject
+      assert_equal "[AppOptics] Alert  has triggered!", message.subject
       assert_not_nil message
       assert(!message.to.empty?)
     end
 
     def test_mail_message_alert_multiple_emails
-      svc = service(:alert, { :addresses => 'fred@barn.com,test@librato.local' }, alert_payload)
+      svc = service(:alert, { :addresses => 'fred@barn.com,test@appoptics.local' }, alert_payload)
       message = svc.mail_message
-      assert_equal "[Librato] Alert  has triggered!", message.subject
-      assert_equal ['fred@barn.com', 'test@librato.local'], message.to
+      assert_equal "[AppOptics] Alert  has triggered!", message.subject
+      assert_equal ['fred@barn.com', 'test@appoptics.local'], message.to
       assert_not_nil message
       assert(!message.to.empty?)
     end
 
     def test_mail_message_alert_multiple_emails_one_invalid
-      svc = service(:alert, { :addresses => 'fred@barn.com,test@@librato.local' }, alert_payload)
+      svc = service(:alert, { :addresses => 'fred@barn.com,test@@appoptics.local' }, alert_payload)
       message = svc.mail_message
-      assert_equal "[Librato] Alert  has triggered!", message.subject
+      assert_equal "[AppOptics] Alert  has triggered!", message.subject
       assert_equal ['fred@barn.com'], message.to
       assert_not_nil message
       assert(!message.to.empty?)
@@ -94,7 +94,7 @@ module Librato::Services
     def test_mail_message_new_alert
       svc = service(:alert, { :addresses => 'fred@barn.com' }, new_alert_payload)
       message = svc.mail_message
-      assert_equal "[Librato] Alert Some alert name has triggered!", message.subject
+      assert_equal "[AppOptics] Alert Some alert name has triggered!", message.subject
       assert_not_nil message
       assert(!message.to.empty?)
     end
@@ -104,7 +104,7 @@ module Librato::Services
       payload[:clear] = "normal"
       svc = service(:alert, { :addresses => 'fred@barn.com' }, payload)
       message = svc.mail_message
-      assert_equal "[Librato] Alert Some alert name has cleared.", message.subject
+      assert_equal "[AppOptics] Alert Some alert name has cleared.", message.subject
       assert_not_nil message
       assert(!message.to.empty?)
     end
@@ -114,7 +114,7 @@ module Librato::Services
       payload[:clear] = "unknown"
       svc = service(:alert, { :addresses => 'fred@barn.com' }, payload)
       message = svc.mail_message
-      assert_equal "[Librato] Alert Some alert name has cleared.", message.subject
+      assert_equal "[AppOptics] Alert Some alert name has cleared.", message.subject
       assert_not_nil message
       assert(!message.to.empty?)
     end
@@ -124,7 +124,7 @@ module Librato::Services
       payload[:clear] = "manual"
       svc = service(:alert, { :addresses => 'fred@barn.com' }, payload)
       message = svc.mail_message
-      assert_equal "[Librato] Alert Some alert name has cleared.", message.subject
+      assert_equal "[AppOptics] Alert Some alert name has cleared.", message.subject
       assert_not_nil message
       assert(!message.to.empty?)
     end
@@ -134,7 +134,7 @@ module Librato::Services
       payload[:clear] = "auto"
       svc = service(:alert, { :addresses => 'fred@barn.com' }, payload)
       message = svc.mail_message
-      assert_equal "[Librato] Alert Some alert name has cleared.", message.subject
+      assert_equal "[AppOptics] Alert Some alert name has cleared.", message.subject
       assert_not_nil message
       assert(!message.to.empty?)
     end
@@ -146,7 +146,7 @@ module Librato::Services
       svc.mail_message.perform_deliveries = false
       message = svc.mail_message
       assert(!message.to.empty?)
-      assert_equal "[Librato] [Test] Alert Some alert name has triggered!", message.subject
+      assert_equal "[AppOptics] [Test] Alert Some alert name has triggered!", message.subject
       assert include_test_alert_message?(message.html_part.body.decoded)
       assert include_test_alert_message?(message.text_part.body.decoded)
     end
@@ -159,7 +159,7 @@ module Librato::Services
       svc.mail_message.perform_deliveries = false
       message = svc.mail_message
       assert(!message.to.empty?)
-      assert_equal "[Librato] [Test] Alert  has triggered!", message.subject
+      assert_equal "[AppOptics] [Test] Alert  has triggered!", message.subject
       assert include_test_alert_message?(message.html_part.body.decoded)
       assert include_test_alert_message?(message.text_part.body.decoded)
 
@@ -194,7 +194,7 @@ module Librato::Services
     end
 
     def service(*args)
-      super Librato::Services::Service::Mail, *args
+      super AppOptics::Services::Service::Mail, *args
     end
   end
 end

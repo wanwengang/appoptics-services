@@ -1,6 +1,6 @@
 require File.expand_path('../helper', __FILE__)
 
-class BigPandaTest < Librato::Services::TestCase
+class BigPandaTest < AppOptics::Services::TestCase
   def setup
     @settings = {:app_key => 'my api key', :token => 'my token', :application => 'webapp'}
     @stub_url = URI.parse('https://api.bigpanda.io/data/v2/alerts').request_uri
@@ -17,6 +17,6 @@ class BigPandaTest < Librato::Services::TestCase
   end
 
   def service(*args)
-    super Librato::Services::Service::BigPanda, *args
+    super AppOptics::Services::Service::BigPanda, *args
   end
 end

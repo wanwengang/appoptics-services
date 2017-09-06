@@ -1,9 +1,9 @@
 # encoding: utf-8
 
 # Initial implementation by Mike Heffner:
-#  https://github.com/librato/papertrail_pagerduty_webhook
-module Librato::Services
-  class Service::Pagerduty < Librato::Services::Service
+#  https://github.com/appoptics/papertrail_pagerduty_webhook
+module AppOptics::Services
+  class Service::Pagerduty < AppOptics::Services::Service
     def receive_validate(errors)
       success = true
       [:service_key, :event_type, :description].each do |k|

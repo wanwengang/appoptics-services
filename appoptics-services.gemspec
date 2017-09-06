@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "librato-services"
-  s.version = "3.2.17"
+  s.name = "appoptics-services"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Mike Heffner"]
   s.date = "2017-09-06"
   s.description = "Provides service notifications for alerts"
-  s.email = "mike@librato.com"
+  s.email = "mike@appoptics.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.md"
@@ -29,14 +29,6 @@ Gem::Specification.new do |s|
     "circle.yml",
     "config.ru",
     "dot.rvmrc",
-    "lib/librato-services.rb",
-    "lib/librato-services/authentication.rb",
-    "lib/librato-services/helpers/alert_helpers.rb",
-    "lib/librato-services/helpers/snapshot_helpers.rb",
-    "lib/librato-services/numbers.rb",
-    "lib/librato-services/output.rb",
-    "lib/librato-services/service.rb",
-    "librato-services.gemspec",
     "services/big_panda.rb",
     "services/campfire.rb",
     "services/flowdock.rb",
@@ -69,7 +61,7 @@ Gem::Specification.new do |s|
     "test/webhook_test.rb",
     "test/zapier_test.rb"
   ]
-  s.homepage = "http://github.com/librato/librato-services"
+  s.homepage = "http://github.com/appoptics/appoptics-services"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.23.2"

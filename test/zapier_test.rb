@@ -1,7 +1,7 @@
 require File.expand_path('../helper', __FILE__)
 
-module Librato::Service
-  class ZapierTest < Librato::Services::TestCase
+module AppOptics::Service
+  class ZapierTest < AppOptics::Services::TestCase
     def setup
       @stubs = Faraday::Adapter::Test::Stubs.new
       @settings = { :url => 'https://zapier.com/hooks/catch/abc123/' }
@@ -56,7 +56,7 @@ module Librato::Service
     end
 
     def service(*args)
-      super Librato::Services::Service::Zapier, *args
+      super AppOptics::Services::Service::Zapier, *args
     end
   end
 end

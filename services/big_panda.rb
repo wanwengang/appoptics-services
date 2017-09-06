@@ -1,6 +1,6 @@
 # See https://www.bigpanda.io/docs/integrations/index.html#alerts-rest-api
-module Librato::Services
-  class Service::BigPanda < Librato::Services::Service
+module AppOptics::Services
+  class Service::BigPanda < AppOptics::Services::Service
     def receive_validate(errors = {})
       success = true
       [:app_key, :token].each do |k|
@@ -55,7 +55,7 @@ module Librato::Services
         sources = []
         violations = []
         index = 1
-        output = Librato::Services::Output.new(payload)
+        output = AppOptics::Services::Output.new(payload)
         payload['violations'].each do |source, measurements|
           sources << source
           measurements.each do |measurement|

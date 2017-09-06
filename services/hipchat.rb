@@ -2,8 +2,8 @@ require 'hipchat'
 require 'timeout'
 require 'uri'
 
-module Librato::Services
-  class Service::Hipchat < Librato::Services::Service
+module AppOptics::Services
+  class Service::Hipchat < AppOptics::Services::Service
     attr_writer :hipchat
 
     # Required parameters:
@@ -76,7 +76,7 @@ module Librato::Services
 
       # New-style alerts
       if payload[:alert][:version] == 2
-        output = Librato::Services::Output.new(payload)
+        output = AppOptics::Services::Output.new(payload)
         return output.markdown
       end
       # Old-style alerts

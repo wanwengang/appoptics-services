@@ -2,8 +2,8 @@
 require 'erb'
 require 'mail'
 
-module Librato::Services
-  class Service::Mail < Librato::Services::Service
+module AppOptics::Services
+  class Service::Mail < AppOptics::Services::Service
     @@email_regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+/
 
     def receive_validate(errors)
@@ -48,22 +48,22 @@ module Librato::Services
     def mail_message
       @mail_message ||= begin
                           mail = ::Mail.new
-                          mail.from    'Librato <metrics@librato.com>'
+                          mail.from    'AppOptics <metrics@appoptics.com>'
                           mail.to      mail_addresses
                           mail.header['X-Mailgun-Tag'] = 'alerts'
                           trigger_time_utc = Time.at(payload[:trigger_time]).utc
                           if payload[:clear]
-                            mail.subject %{[Librato] Alert #{payload[:alert][:name]} has cleared.}
+                            mail.subject %{[AppOptics] Alert #{payload[:alert][:name]} has cleared.}
                           else
-                            mail.subject %{[Librato] Alert #{payload[:alert][:name]} has triggered!}
+                            mail.subject %{[AppOptics] Alert #{payload[:alert][:name]} has triggered!}
                           end
 
                           if payload[:triggered_by_user_test]
-                            mail.subject %{[Librato] [Test] Alert #{payload[:alert][:name]} has triggered!}
+                            mail.subject %{[AppOptics] [Test] Alert #{payload[:alert][:name]} has triggered!}
                           end
 
                           if payload[:alert][:version] == 2
-                            output = Librato::Services::Output.new(payload, false)
+                            output = AppOptics::Services::Output.new(payload, false)
                             text = payload[:triggered_by_user_test] ? create_test_notice_markdown() + output.markdown : output.markdown
                             html = new_html_email(output.html, payload[:triggered_by_user_test])
                           else
@@ -99,19 +99,19 @@ module Librato::Services
       <<-EOF
 <html>
   <head>
-    <title>Librato Alert</title>
+    <title>AppOptics Alert</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   </head>
   <body style="background-color: #ffffff; padding: 20px; margin: 0px;">
     #{test_notice}
     <div id="headlogo" style="text-align: left; padding-top:20px;">
-    <img src="https://s3.amazonaws.com/librato_images/logo-librato-swi/Librato2017@2x.png" width="180" alt="Librato Metrics" />
+    <img src="https://s3.amazonaws.com/appoptics_images/logo-appoptics-swi/AppOptics2017@2x.png" width="180" alt="AppOptics Metrics" />
     </div>
     <div style="background-color: #ffffff; font-family: Arial; font-size: 12px; color: #000000; text-align: left; vertical-align: top;">
     <div id="content">#{html}</div>
     </div>
     <div style="background-color: #ffffff; padding: 20px; font-family: Arial; font-size: 10px; line-height: 150%; color: #000000; text-align: center; vertical-align: top;">
-      You received this email because you set up alerts with the Librato app.
+      You received this email because you set up alerts with the AppOptics app.
     </div>
   </body>
 </html>
@@ -123,7 +123,7 @@ module Librato::Services
 
 <html>
   <head>
-    <title>Librato Metrics</title>
+    <title>AppOptics Metrics</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   </head>
   <body style="background-color: #2a2a2a; padding: 0px; margin: 0px;">
@@ -142,7 +142,7 @@ module Librato::Services
               <td align="center" valign="top">
                 <div id="headbar" style="background-color: #000000;padding: 20px;border-bottom: 0px solid #000000;">
                   <div id="headlogo" style="color: #CCC; font-size: 3em; font-family: Arial; font-weight: bold; text-align: left; text-shadow: black 0px 2px 0px, #E5E5E5 0px -1px 0px; vertical-align: middle">
-                    <img src="https://s3.amazonaws.com/librato_images/librato_logo.png" alt="Librato Metrics">
+                    <img src="https://s3.amazonaws.com/appoptics_images/appoptics_logo.png" alt="AppOptics Metrics">
                   </div>
                 </div>
               </td>
@@ -199,8 +199,8 @@ EOF
       View the metric here: <%= payload_link(payload) %>
 
       --
-      Librato Metrics
-      metrics@librato.com - https://metrics.librato.com/
+      AppOptics Metrics
+      metrics@appoptics.com - https://metrics.appoptics.com/
     EOF
     end
 

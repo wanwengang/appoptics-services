@@ -4,8 +4,8 @@ require 'flowdock'
 
 require_relative './mail'
 
-module Librato::Services
-  class Service::Flowdock < Librato::Services::Service::Mail
+module AppOptics::Services
+  class Service::Flowdock < AppOptics::Services::Service::Mail
     attr_writer :flowdock
 
     def receive_validate(errors = {})
@@ -59,16 +59,16 @@ module Librato::Services
     end
 
     def flowdock
-      username = "Librato"
+      username = "AppOptics"
       username = settings[:user_name] unless settings[:user_name].blank?
 
       @flowdock ||= ::Flowdock::Flow.new(
                                          :api_token => settings[:api_token],
                                          :external_user_name => username,
-                                         :source => "Librato Metrics",
+                                         :source => "AppOptics Metrics",
                                          :from => {
-                                           :name => "Librato Metrics",
-                                           :address => "metrics@librato.com"})
+                                           :name => "AppOptics Metrics",
+                                           :address => "metrics@appoptics.com"})
     rescue ::Flowdock::Flow::ApiError => ai
       if ai.message =~ /Invalid tokens/
         raise_error 'Authentication failed — invalid token'

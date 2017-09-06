@@ -1,7 +1,7 @@
 require File.expand_path('../helper', __FILE__)
 
-module Librato::Services
-  class VictorOpsTest < Librato::Services::TestCase
+module AppOptics::Services
+  class VictorOpsTest < AppOptics::Services::TestCase
 
     def setup
       @settings = { api_key: 'some_keys', routing_key: 'five' }
@@ -39,7 +39,7 @@ module Librato::Services
     end
 
     def service(*args)
-      super Librato::Services::Service::VictorOps, *args
+      super AppOptics::Services::Service::VictorOps, *args
     end
   end
 end

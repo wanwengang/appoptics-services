@@ -1,8 +1,8 @@
 require File.expand_path('../helper', __FILE__)
 require 'rspec/mocks/standalone'
 
-module Librato::Services
-  class SNSTest < Librato::Services::TestCase
+module AppOptics::Services
+  class SNSTest < AppOptics::Services::TestCase
     include ::RSpec::Mocks::ExampleMethods
 
     def before_setup
@@ -50,17 +50,17 @@ module Librato::Services
 
       svc = service(:alert, default_setting, alert_payload)
 
-      assert_raise_with_message(Librato::Services::Service::ConfigurationError,
+      assert_raise_with_message(AppOptics::Services::Service::ConfigurationError,
                                 'Authentication failed - incorrect access key id or access key secret') do
         svc.publish_message({msg: ''})
       end
 
-      assert_raise_with_message(Librato::Services::Service::ConfigurationError,
+      assert_raise_with_message(AppOptics::Services::Service::ConfigurationError,
                                 'Authorization failed - ensure that the user is allowed to perform SNS:Publish action') do
         svc.publish_message({msg: ''})
       end
 
-      assert_raise_with_message(Librato::Services::Service::ServiceError, 'Some horrible AWS Error') do
+      assert_raise_with_message(AppOptics::Services::Service::ServiceError, 'Some horrible AWS Error') do
         svc.publish_message({msg: ''})
       end
 
@@ -178,7 +178,7 @@ module Librato::Services
     end
 
     def service(*args)
-      super Librato::Services::Service::SNS, *args
+      super AppOptics::Services::Service::SNS, *args
     end
 
     def default_setting(overrides = {})

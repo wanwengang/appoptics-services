@@ -1,7 +1,7 @@
 require File.expand_path('../helper', __FILE__)
 
-module Librato::Services
-  class SlackTest < Librato::Services::TestCase
+module AppOptics::Services
+  class SlackTest < AppOptics::Services::TestCase
     def setup
       @settings = { :url => "https://example.com?token=foo" }
       @stub_url = URI.parse(@settings[:url]).request_uri
@@ -41,7 +41,7 @@ module Librato::Services
         [200, {}, '']
       end
 
-      assert_raises(Librato::Services::Service::ConfigurationError) { svc.receive_alert }
+      assert_raises(AppOptics::Services::Service::ConfigurationError) { svc.receive_alert }
     end
 
     def test_v2_custom_alert_clear
@@ -55,7 +55,7 @@ module Librato::Services
         attachment = payload["attachments"][0]
         assert_equal(["color", "fallback", "text"], attachment.keys.sort)
         assert_nil(payload["text"])
-        assert_equal "Alert <https://metrics.librato.com/alerts/123|Some alert name> has cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
+        assert_equal "Alert <https://metrics.appoptics.com/alerts/123|Some alert name> has cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
         assert_equal "Alert 'Some alert name' has cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["fallback"]
         [200, {}, '']
       end
@@ -73,7 +73,7 @@ module Librato::Services
         attachment = payload["attachments"][0]
         assert_equal(["color", "fallback", "text"], attachment.keys.sort)
         assert_nil(payload["text"])
-        assert_equal "Alert <https://metrics.librato.com/alerts/123|Some alert name> has cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
+        assert_equal "Alert <https://metrics.appoptics.com/alerts/123|Some alert name> has cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
         assert_equal "Alert 'Some alert name' has cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["fallback"]
         [200, {}, '']
       end
@@ -91,7 +91,7 @@ module Librato::Services
         attachment = payload["attachments"][0]
         assert_equal(["color", "fallback", "text"], attachment.keys.sort)
         assert_nil(payload["text"])
-        assert_equal "Alert <https://metrics.librato.com/alerts/123|Some alert name> was manually cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
+        assert_equal "Alert <https://metrics.appoptics.com/alerts/123|Some alert name> was manually cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
         assert_equal "Alert 'Some alert name' was manually cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["fallback"]
         [200, {}, '']
       end
@@ -109,7 +109,7 @@ module Librato::Services
         attachment = payload["attachments"][0]
         assert_equal(["color", "fallback", "text"], attachment.keys.sort)
         assert_nil(payload["text"])
-        assert_equal "Alert <https://metrics.librato.com/alerts/123|Some alert name> was automatically cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
+        assert_equal "Alert <https://metrics.appoptics.com/alerts/123|Some alert name> was automatically cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
         assert_equal "Alert 'Some alert name' was automatically cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["fallback"]
         [200, {}, '']
       end
@@ -169,7 +169,7 @@ module Librato::Services
 
       @stubs.post @stub_url do |env|
         payload = JSON.parse(env[:body])
-        assert_equal("Librato User", payload["attachments"][0]["author_name"])
+        assert_equal("AppOptics User", payload["attachments"][0]["author_name"])
         [200, {}, '']
       end
 
@@ -183,7 +183,7 @@ module Librato::Services
 
       @stubs.post @stub_url do |env|
         payload = JSON.parse(env[:body])
-        assert_equal("portal-dev@librato.com", payload["attachments"][0]["author_name"])
+        assert_equal("portal-dev@appoptics.com", payload["attachments"][0]["author_name"])
         [200, {}, '']
       end
 
@@ -191,7 +191,7 @@ module Librato::Services
     end
 
     def service(*args)
-      super Librato::Services::Service::Slack, *args
+      super AppOptics::Services::Service::Slack, *args
     end
   end
 end

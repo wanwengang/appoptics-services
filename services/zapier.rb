@@ -1,6 +1,6 @@
-module Librato::Services
+module AppOptics::Services
 
-  class Service::Zapier < Librato::Services::Service
+  class Service::Zapier < AppOptics::Services::Service
     def receive_validate(errors = {})
       if settings[:url].to_s.empty?
         errors[:url] = "Is required"
@@ -47,7 +47,7 @@ module Librato::Services
         outgoing_payload[:runbook_url] = payload[:alert][:runbook_url] if present?(payload[:alert][:runbook_url])
 
         if payload[:violations]
-          output = Librato::Services::Output.new(payload)
+          output = AppOptics::Services::Output.new(payload)
           outgoing_payload[:violations] = payload[:violations].flat_map do |source, measurements|
             measurements.map { |measurement| output.format_measurement(measurement, source) }
           end.join(". ")

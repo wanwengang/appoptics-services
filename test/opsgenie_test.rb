@@ -1,10 +1,10 @@
 require File.expand_path('../helper', __FILE__)
 
-module Librato::Services
-  class OpsGenieTest < Librato::Services::TestCase
+module AppOptics::Services
+  class OpsGenieTest < AppOptics::Services::TestCase
     def setup
       @settings = { :customer_key => "my api key" }
-      @stub_url = URI.parse("https://api.opsgenie.com/v1/json/librato").request_uri
+      @stub_url = URI.parse("https://api.opsgenie.com/v1/json/appoptics").request_uri
       @stubs = Faraday::Adapter::Test::Stubs.new
     end
 
@@ -42,7 +42,7 @@ module Librato::Services
     end
 
     def service(*args)
-      super Librato::Services::Service::OpsGenie, *args
+      super AppOptics::Services::Service::OpsGenie, *args
     end
   end
 end
