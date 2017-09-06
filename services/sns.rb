@@ -2,8 +2,8 @@
 
 require 'aws-sdk-core'
 
-module Librato::Services
-  class Service::SNS < Librato::Services::Service
+module AppOptics::Services
+  class Service::SNS < AppOptics::Services::Service
 
     def receive_validate(errors = {})
       success = true
@@ -88,7 +88,7 @@ module Librato::Services
         trigger_time_utc = DateTime.strptime(payload[:trigger_time].to_s, "%s").strftime("%a, %b %e %Y at %H:%M:%S UTC")
         json[:sms] = "Alert '#{payload[:alert][:name]}' has cleared at #{trigger_time_utc}"
       elsif payload[:alert][:version] == 2
-        json[:sms] = Librato::Services::Output.new(payload).sms_message
+        json[:sms] = AppOptics::Services::Output.new(payload).sms_message
       end
 
       json.to_json

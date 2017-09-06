@@ -9,7 +9,7 @@ Dir[File.join(File.dirname(__FILE__), 'helpers/*helpers*')].each { |helper|
 require_relative 'helpers/alert_helpers'
 require_relative 'output'
 
-module Librato
+module AppOptics
   module Services
     class Service
 
@@ -54,7 +54,7 @@ module Librato
       end
 
       def self.inherited(svc)
-        Librato::Services::Service.services[svc.hook_name] = svc
+        AppOptics::Services::Service.services[svc.hook_name] = svc
         super
       end
 
@@ -65,8 +65,8 @@ module Librato
 
       def initialize(event = :alert, settings = {}, payload = nil)
         helper_name = "#{event.to_s.capitalize}Helpers"
-        if Librato::Services::Helpers.const_defined?(helper_name)
-          @helper = Librato::Services::Helpers.const_get(helper_name)
+        if AppOptics::Services::Helpers.const_defined?(helper_name)
+          @helper = AppOptics::Services::Helpers.const_get(helper_name)
           extend @helper
         end
 

@@ -1,10 +1,10 @@
-require_relative '../lib/librato-services/numbers'
+require_relative '../lib/appoptics-services/numbers'
 
 class NumbersTest < Test::Unit::TestCase
-  Numbers = Librato::Services::Numbers
+  Numbers = AppOptics::Services::Numbers
 
   def format(threshold, number, tolerance=2)
-    Librato::Services::Numbers.format_for_threshold(threshold,number,tolerance)
+    AppOptics::Services::Numbers.format_for_threshold(threshold,number,tolerance)
   end
 
   def test_does_not_change

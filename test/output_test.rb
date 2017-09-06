@@ -1,7 +1,7 @@
 require File.expand_path('../helper', __FILE__)
 
-class Librato::Services::OutputTestCase < Librato::Services::TestCase
-  ENV['METRICS_APP_URL'] = 'metrics.librato.com'
+class AppOptics::Services::OutputTestCase < AppOptics::Services::TestCase
+  ENV['METRICS_APP_URL'] = 'metrics.appoptics.com'
   def test_clear
     payload = {
       alert: {id: 123, name: "Some alert name", version: 2},
@@ -11,11 +11,11 @@ class Librato::Services::OutputTestCase < Librato::Services::TestCase
       trigger_time: 12321123,
       clear: "normal"
     }
-    output = Librato::Services::Output.new(payload)
+    output = AppOptics::Services::Output.new(payload)
     expected = <<EOF
 # Alert Some alert name has cleared at 1970-05-23 14:32:03 UTC
 
-Link: https://metrics.librato.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/123
 EOF
     assert_equal(expected, output.markdown)
   end
@@ -29,11 +29,11 @@ EOF
       trigger_time: 12321123,
       clear: "auto"
     }
-    output = Librato::Services::Output.new(payload)
+    output = AppOptics::Services::Output.new(payload)
     expected = <<EOF
 # Alert Some alert name was automatically cleared at 1970-05-23 14:32:03 UTC
 
-Link: https://metrics.librato.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/123
 EOF
     assert_equal(expected, output.markdown)
   end
@@ -47,11 +47,11 @@ EOF
       trigger_time: 12321123,
       clear: "manual"
     }
-    output = Librato::Services::Output.new(payload)
+    output = AppOptics::Services::Output.new(payload)
     expected = <<EOF
 # Alert Some alert name was manually cleared at 1970-05-23 14:32:03 UTC
 
-Link: https://metrics.librato.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/123
 EOF
     assert_equal(expected, output.markdown)
   end
@@ -65,12 +65,12 @@ EOF
       trigger_time: 12321123,
       clear: "unsupported"
     }
-    output = Librato::Services::Output.new(payload)
+    output = AppOptics::Services::Output.new(payload)
     # fall back to the 'normal' case
     expected = <<EOF
 # Alert Some alert name has cleared at 1970-05-23 14:32:03 UTC
 
-Link: https://metrics.librato.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/123
 EOF
     assert_equal(expected, output.markdown)
   end
@@ -92,11 +92,11 @@ EOF
         }]
       }
     }
-    output = Librato::Services::Output.new(payload)
+    output = AppOptics::Services::Output.new(payload)
     expected = <<EOF
 # Alert Some alert name has triggered!
 
-Link: https://metrics.librato.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/123
 
 Source `foo.bar`:
 * metric `metric.name` was above threshold 10.5 with value 100.123 recorded at Fri, Jan 10 2014 at 21:58:03 UTC
@@ -123,7 +123,7 @@ EOF
         email: "account@email.com"
       }
     }
-    output = Librato::Services::Output.new(payload)
+    output = AppOptics::Services::Output.new(payload)
     assert include_test_alert_message?(output.markdown)
   end
 
@@ -155,11 +155,11 @@ EOF
         ]
       }
     }
-    output = Librato::Services::Output.new(payload)
+    output = AppOptics::Services::Output.new(payload)
     expected = <<EOF
 # Alert Some alert name has triggered!
 
-Link: https://metrics.librato.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/123
 
 Source `foo.bar`:
 * metric `metric.name` was above threshold 10 with value 100 recorded at Fri, Jan 10 2014 at 21:58:03 UTC
@@ -174,11 +174,11 @@ EOF
 
   def test_bad_payload
     assert_raise RuntimeError do
-      output = Librato::Services::Output.new({})
+      output = AppOptics::Services::Output.new({})
     end
 
     assert_raise NoMethodError do
-      output = Librato::Services::Output.new({:conditions => "", :violations => ""})
+      output = AppOptics::Services::Output.new({:conditions => "", :violations => ""})
     end
   end
 
@@ -200,7 +200,7 @@ EOF
 </ul>
 EOF
 
-    assert_equal(expected, Librato::Services::Output.renderer.render(markdown))
+    assert_equal(expected, AppOptics::Services::Output.renderer.render(markdown))
   end
 
   def test_windowed_alert
@@ -219,11 +219,11 @@ EOF
                           }]
         }
     }
-    output = Librato::Services::Output.new(payload)
+    output = AppOptics::Services::Output.new(payload)
     expected = <<EOF
 # Alert Some alert name has triggered!
 
-Link: https://metrics.librato.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/123
 
 Source `foo.bar`:
 * metric `metric.name` was above threshold 10 over 90 seconds with value 100 recorded at Fri, Jan 10 2014 at 21:56:33 UTC
@@ -247,11 +247,11 @@ EOF
                           }]
         }
     }
-    output = Librato::Services::Output.new(payload)
+    output = AppOptics::Services::Output.new(payload)
     expected = <<EOF
 # Alert Some alert name has triggered!
 
-Link: https://metrics.librato.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/123
 
 Source `foo.bar`:
 * metric `metric.name` was above threshold 10 with value 100 recorded at Fri, Jan 10 2014 at 21:58:03 UTC
@@ -277,7 +277,7 @@ EOF
                           }]
         }
     }
-    output = Librato::Services::Output.new(payload)
+    output = AppOptics::Services::Output.new(payload)
     # Trying to avoid the <em> here
     assert_no_match(/Alert Some<em>alert<\/em>name/, output.generate_html)
     # In favor of underscores
@@ -285,38 +285,38 @@ EOF
   end
 
   def test_violations_message
-    payload = Librato::Services::Helpers::AlertHelpers.sample_new_alert_payload
-    output = Librato::Services::Output.new(payload)
+    payload = AppOptics::Services::Helpers::AlertHelpers.sample_new_alert_payload
+    output = AppOptics::Services::Output.new(payload)
 
     assert_match('metric `metric.name` from `foo.bar`', output.sms_message)
   end
 
   def test_valid_sms
-    payload = Librato::Services::Helpers::AlertHelpers.sample_new_alert_payload
-    output = Librato::Services::Output.new(payload)
+    payload = AppOptics::Services::Helpers::AlertHelpers.sample_new_alert_payload
+    output = AppOptics::Services::Output.new(payload)
 
     assert_equal(true, output.valid_sms?)
   end
 
   def test_invalid_sms
-    payload = Librato::Services::Helpers::AlertHelpers.sample_new_alert_payload
+    payload = AppOptics::Services::Helpers::AlertHelpers.sample_new_alert_payload
     payload['violations']['foo.bar'][0]['metric'] = SecureRandom.urlsafe_base64(160)[0..159]
-    output = Librato::Services::Output.new(payload)
+    output = AppOptics::Services::Output.new(payload)
 
     assert_equal(false, output.valid_sms?)
   end
 
   def test_sms_message
-    payload = Librato::Services::Helpers::AlertHelpers.sample_new_alert_payload
-    output = Librato::Services::Output.new(payload)
+    payload = AppOptics::Services::Helpers::AlertHelpers.sample_new_alert_payload
+    output = AppOptics::Services::Output.new(payload)
 
     assert_equal(true, output.sms_message.length <= 140)
   end
 
   def test_truncated_sms_message
-    payload = Librato::Services::Helpers::AlertHelpers.sample_new_alert_payload
+    payload = AppOptics::Services::Helpers::AlertHelpers.sample_new_alert_payload
     payload['violations']['foo.bar'][0]['metric'] = SecureRandom.urlsafe_base64(160)[0..159]
-    output = Librato::Services::Output.new(payload)
+    output = AppOptics::Services::Output.new(payload)
 
     assert_equal(140, output.sms_message.length)
     assert_equal(true, output.sms_message.end_with?('...'))

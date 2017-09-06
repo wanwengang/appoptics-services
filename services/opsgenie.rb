@@ -5,8 +5,8 @@ require 'cgi'
 require 'yajl'
 require 'faraday'
 
-module Librato::Services
-  class Service::OpsGenie < Librato::Services::Service
+module AppOptics::Services
+  class Service::OpsGenie < AppOptics::Services::Service
     def receive_validate(errors)
       success = true
       [:customer_key ].each do |k|
@@ -61,7 +61,7 @@ module Librato::Services
     end
 
     def post_it(hash, triggered_by_user_test)
-      url = "https://api.opsgenie.com/v1/json/librato"
+      url = "https://api.opsgenie.com/v1/json/appoptics"
       tags = settings[:tags].nil? ?  "" : settings[:tags].dup
       if triggered_by_user_test
         tags += tags.empty? ? "triggered_by_user_test" : ",triggered_by_user_test"

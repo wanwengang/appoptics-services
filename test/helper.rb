@@ -4,11 +4,11 @@ require 'bundler'
 Bundler.require
 
 $:.unshift(File.join(File.dirname(__FILE__), '../lib'))
-require 'librato-services'
+require 'appoptics-services'
 
 require 'test/unit'
 
-class Librato::Services::TestCase < Test::Unit::TestCase
+class AppOptics::Services::TestCase < Test::Unit::TestCase
   def test_default
   end
 
@@ -34,19 +34,19 @@ class Librato::Services::TestCase < Test::Unit::TestCase
   end
 
   def new_alert_payload
-    Librato::Services::Helpers::AlertHelpers.sample_new_alert_payload
+    AppOptics::Services::Helpers::AlertHelpers.sample_new_alert_payload
   end
 
   def alert_payload_multiple_measurements
-    Librato::Services::Helpers::AlertHelpers.sample_alert_payload_multiple_measurements
+    AppOptics::Services::Helpers::AlertHelpers.sample_alert_payload_multiple_measurements
   end
 
   def alert_payload
-    Librato::Services::Helpers::AlertHelpers.sample_alert_payload
+    AppOptics::Services::Helpers::AlertHelpers.sample_alert_payload
   end
 
   def snapshot_payload
-    Librato::Services::Helpers::SnapshotHelpers.sample_snapshot_payload
+    AppOptics::Services::Helpers::SnapshotHelpers.sample_snapshot_payload
   end
 
   def include_test_alert_message?(actual)

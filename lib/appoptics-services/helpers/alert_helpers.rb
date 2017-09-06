@@ -1,7 +1,7 @@
 require 'tilt'
 require 'active_support'
 
-module Librato
+module AppOptics
   module Services
     module Helpers
       module AlertHelpers

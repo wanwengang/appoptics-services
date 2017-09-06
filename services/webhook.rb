@@ -5,8 +5,8 @@ require 'cgi'
 require 'yajl'
 require 'faraday'
 
-module Librato::Services
-  class Service::Webhook < Librato::Services::Service
+module AppOptics::Services
+  class Service::Webhook < AppOptics::Services::Service
     def receive_validate(errors = {})
       if settings[:url].to_s.empty?
         errors[:url] = "Is required"

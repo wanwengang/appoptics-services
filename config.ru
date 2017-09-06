@@ -40,6 +40,6 @@ elsif ENV["HONEYBADGER_API_KEY"].to_s.length > 0
 end
 
 $:.unshift File.join(File.dirname(__FILE__), 'lib')
-require "librato-services"
+require "appoptics-services"
 
-run Librato::Services::App
+run AppOptics::Services::App

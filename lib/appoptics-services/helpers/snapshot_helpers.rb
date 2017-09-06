@@ -1,6 +1,6 @@
 require 'tilt'
 
-module Librato
+module AppOptics
   module Services
     module Helpers
       module SnapshotHelpers
@@ -11,11 +11,11 @@ module Librato
           {
             :snapshot => {
               :entity_name => "App API Requests",
-              :entity_url => "https://metrics.librato.com/instruments/1234?duration=3600",
-              :image_url => "http://snapshots.librato.com/instruments/12345abcd.png",
+              :entity_url => "https://metrics.appoptics.com/instruments/1234?duration=3600",
+              :image_url => "http://snapshots.appoptics.com/instruments/12345abcd.png",
               :user => {
-                :email => "portal-dev@librato.com",
-                :full_name => "Librato User"
+                :email => "portal-dev@appoptics.com",
+                :full_name => "AppOptics User"
               },
               :subject => "Subject of API Requests",
               :message => "Explanation of this snapshot"

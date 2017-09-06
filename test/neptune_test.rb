@@ -1,7 +1,7 @@
 require File.expand_path('../helper', __FILE__)
 
-module Librato::Services
-  class NeptuneTest < Librato::Services::TestCase
+module AppOptics::Services
+  class NeptuneTest < AppOptics::Services::TestCase
     def setup
       @stubs = Faraday::Adapter::Test::Stubs.new
     end
@@ -29,7 +29,7 @@ module Librato::Services
     end
 
     def test_alerts_multiple_measurements
-      path = "/api/v1/trigger/channel/librato/test_api_key"
+      path = "/api/v1/trigger/channel/appoptics/test_api_key"
       svc = service(:alert, { :api_key => 'test_api_key'}, alert_payload_multiple_measurements)
 
       @stubs.post "#{path}" do |env|
@@ -40,7 +40,7 @@ module Librato::Services
     end
 
     def test_alerts
-      path = "/api/v1/trigger/channel/librato/test_api_key"
+      path = "/api/v1/trigger/channel/appoptics/test_api_key"
       svc = service(:alert, { :api_key => 'test_api_key'}, alert_payload)
 
       @stubs.post "#{path}" do |env|
@@ -51,7 +51,7 @@ module Librato::Services
     end
 
     def test_new_alerts
-      path = "/api/v1/trigger/channel/librato/test_api_key"
+      path = "/api/v1/trigger/channel/appoptics/test_api_key"
       payload = new_alert_payload.dup
       svc = service(:alert, { :api_key => 'test_api_key'}, payload)
 
@@ -75,7 +75,7 @@ module Librato::Services
     end
 
     def test_new_alerts_clearing
-      path = "/api/v1/trigger/channel/librato/test_api_key"
+      path = "/api/v1/trigger/channel/appoptics/test_api_key"
       payload = new_alert_payload.dup
       payload[:clear] = "normal"
       svc = service(:alert, { :api_key => 'test_api_key'}, payload)
@@ -100,7 +100,7 @@ module Librato::Services
     end
 
     def test_new_alert_test_trigger
-      path = "/api/v1/trigger/channel/librato/test_api_key"
+      path = "/api/v1/trigger/channel/appoptics/test_api_key"
       payload = new_alert_payload.dup
       payload[:triggered_by_user_test] = true
       svc = service(:alert, { :api_key => 'test_api_key' }, payload)
@@ -115,7 +115,7 @@ module Librato::Services
     end
 
     def service(*args)
-      super Librato::Services::Service::Neptune, *args
+      super AppOptics::Services::Service::Neptune, *args
     end
   end
 end

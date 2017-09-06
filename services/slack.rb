@@ -4,8 +4,8 @@ require 'uri'
 require 'cgi'
 require 'digest'
 
-module Librato::Services
-  class Service::Slack < Librato::Services::Service
+module AppOptics::Services
+  class Service::Slack < AppOptics::Services::Service
     VERTICAL_LINE_COLOR = "#0880ad"
 
     def receive_validate(errors = {})
@@ -23,7 +23,7 @@ module Librato::Services
     end
 
     def v2_alert_result
-      data = Librato::Services::Output.new(payload)
+      data = AppOptics::Services::Output.new(payload)
       runbook_url = data.alert[:runbook_url]
       trigger_time_utc = DateTime.strptime(data.trigger_time.to_s, "%s").strftime("%a, %b %e %Y at %H:%M:%S UTC")
       if data.clear

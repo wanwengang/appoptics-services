@@ -1,5 +1,5 @@
-class ClearingTest < Librato::Services::TestCase
-  class ClearingService < Librato::Services::Service
+class ClearingTest < AppOptics::Services::TestCase
+  class ClearingService < AppOptics::Services::Service
     def receive_alert_clear
     end
     def sample_payload
@@ -7,7 +7,7 @@ class ClearingTest < Librato::Services::TestCase
     end
   end
 
-  class NotClearingService < Librato::Services::Service
+  class NotClearingService < AppOptics::Services::Service
     def sample_payload
       {}
     end

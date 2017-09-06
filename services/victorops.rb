@@ -1,7 +1,7 @@
 require 'uri'
 
-module Librato::Services
-  class Service::VictorOps < Librato::Services::Service
+module AppOptics::Services
+  class Service::VictorOps < AppOptics::Services::Service
     REQUIRED_SETTING_KEYS = [:api_key]
 
     def receive_validate(errors = {})
@@ -45,7 +45,7 @@ module Librato::Services
 
     def settings
       @settings.merge({
-                        monitoring_tool: 'librato'
+                        monitoring_tool: 'appoptics'
                       })
     end
 
@@ -53,7 +53,7 @@ module Librato::Services
 
     def flatten_hash(payload)
       {
-        state_message: Librato::Services::Output.new(payload).markdown
+        state_message: AppOptics::Services::Output.new(payload).markdown
       }
     end
 
