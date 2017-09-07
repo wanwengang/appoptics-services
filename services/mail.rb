@@ -105,7 +105,7 @@ module AppOptics::Services
   <body style="background-color: #ffffff; padding: 20px; margin: 0px;">
     #{test_notice}
     <div id="headlogo" style="text-align: left; padding-top:20px;">
-    <img src="https://s3.amazonaws.com/appoptics_images/logo-appoptics-swi/AppOptics2017@2x.png" width="180" alt="AppOptics Metrics" />
+    <img src="https://s3.amazonaws.com/appoptics-email/dist/img/appoptics-logo@2x.png" height="20" alt="AppOptics" />
     </div>
     <div style="background-color: #ffffff; font-family: Arial; font-size: 12px; color: #000000; text-align: left; vertical-align: top;">
     <div id="content">#{html}</div>
@@ -123,7 +123,7 @@ module AppOptics::Services
 
 <html>
   <head>
-    <title>AppOptics Metrics</title>
+    <title>AppOptics</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   </head>
   <body style="background-color: #2a2a2a; padding: 0px; margin: 0px;">
@@ -141,8 +141,8 @@ module AppOptics::Services
             <tr>
               <td align="center" valign="top">
                 <div id="headbar" style="background-color: #000000;padding: 20px;border-bottom: 0px solid #000000;">
-                  <div id="headlogo" style="color: #CCC; font-size: 3em; font-family: Arial; font-weight: bold; text-align: left; text-shadow: black 0px 2px 0px, #E5E5E5 0px -1px 0px; vertical-align: middle">
-                    <img src="https://s3.amazonaws.com/appoptics_images/appoptics_logo.png" alt="AppOptics Metrics">
+                  <div id="headlogo">
+                    <img src="https://s3.amazonaws.com/appoptics-email/dist/img/appoptics-logo@2x.png" height="20" alt="AppOptics">
                   </div>
                 </div>
               </td>
