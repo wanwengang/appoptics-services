@@ -48,7 +48,7 @@ module AppOptics::Services
     def mail_message
       @mail_message ||= begin
                           mail = ::Mail.new
-                          mail.from    'AppOptics <alerts@alerts.appoptics.com>'
+                          mail.from    'AppOptics <notify@alerts.appoptics.com>'
                           mail.to      mail_addresses
                           mail.header['X-Mailgun-Tag'] = 'alerts'
                           trigger_time_utc = Time.at(payload[:trigger_time]).utc
