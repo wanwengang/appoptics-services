@@ -134,12 +134,12 @@ module AppOptics
 
       def smtp_settings
         {
-          :address              => ENV['SMTP_SERVER'],
-          :port                 => ENV['SMTP_PORT']           || 25,
-          :authentication       => ENV['SMTP_AUTHENTICATION'] || :plain,
-          :user_name            => ENV['SMTP_USERNAME']       || ENV['SENDGRID_USERNAME'],
-          :password             => ENV['SMTP_PASSWORD']       || ENV['SENDGRID_PASSWORD'],
-          :domain               => ENV['SMTP_DOMAIN']         || ENV['SENDGRID_DOMAIN'],
+          :address              => ENV['APPOPTICS_SMTP_SERVER'],
+          :port                 => ENV['APPOPTICS_SMTP_PORT']           || 25,
+          :authentication       => ENV['APPOPTICS_SMTP_AUTHENTICATION'] || :plain,
+          :user_name            => ENV['APPOPTICS_SMTP_USERNAME'],
+          :password             => ENV['APPOPTICS_SMTP_PASSWORD'],
+          :domain               => ENV['APPOPTICS_SMTP_DOMAIN'],
           :enable_starttls_auto => true
         }
       end
