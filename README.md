@@ -5,6 +5,21 @@ AppOptics Services
 
 Service hooks for [AppOptics Metrics](https://metrics.appoptics.com).
 
+Making a Release
+----------------
+
+To make a release of this project, follow these steps:
+
+1. Merge all changes to `master` and ensure you are on the latest
+   `master` branch.
+1. Run `bundle exec rake version:bump:patch` (or minor/major depending
+   on size of change).
+1. Run `bundle exec rake gemspec:release`
+1. Run `bundle exec rake git:release`
+
+How the newest version is tagged and can be pulled from git using the
+new version tag.
+
 Service Lifecycle
 -----------------
 
