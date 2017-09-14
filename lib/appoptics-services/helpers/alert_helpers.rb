@@ -90,17 +90,17 @@ module AppOptics
         end
 
         def metric_link(type, name)
-          "https://#{ENV['METRICS_APP_URL']}/metrics/#{name}"
+          "https://#{ENV['APPOPTICS_APP_URL']}/metrics/#{name}"
         end
 
         def alert_link(id)
-          "https://#{ENV['METRICS_APP_URL']}/alerts/#{id}"
+          "https://#{ENV['APPOPTICS_APP_URL']}/alerts/#{id}"
         end
 
         # TODO: fix for specific alert id?
         def payload_link(payload)
           if payload[:alert][:version] == 2
-            "https://#{ENV['METRICS_APP_URL']}/metrics/"
+            "https://#{ENV['APPOPTICS_APP_URL']}/metrics/"
           else
             metric_link(payload[:metric][:type], payload[:metric][:name])
           end
