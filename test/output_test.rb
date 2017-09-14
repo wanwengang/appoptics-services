@@ -1,7 +1,7 @@
 require File.expand_path('../helper', __FILE__)
 
 class AppOptics::Services::OutputTestCase < AppOptics::Services::TestCase
-  ENV['METRICS_APP_URL'] = 'metrics.appoptics.com'
+  ENV['APPOPTICS_APP_URL'] = 'metrics.appoptics.com'
   def test_clear
     payload = {
       alert: {id: 123, name: "Some alert name", version: 2},
