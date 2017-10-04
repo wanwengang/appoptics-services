@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'aws-sdk-core'
+require 'aws-sdk-sns'
 
 module AppOptics::Services
   class Service::SNS < AppOptics::Services::Service
