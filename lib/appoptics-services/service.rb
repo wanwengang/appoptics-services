@@ -85,12 +85,13 @@ module AppOptics
       end
 
       def http_post(url = nil, body = nil, headers = nil)
-        http.post do |req|
+        res = http.post do |req|
           req.url(url)                if url
           req.headers.update(headers) if headers
           req.body = body             if body
           yield req if block_given?
         end
+        Rails.logger.info "POST to #{url}. Status: #{res.status}, Body: #{res.body}" if defined?(Rails)
       end
 
       def http_method(method, url = nil, body = nil, headers = nil)
