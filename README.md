@@ -3,7 +3,7 @@ AppOptics Services
 
 [![Build Status](https://secure.travis-ci.org/appoptics/appoptics-services.png)](http://travis-ci.org/appoptics/appoptics-services)
 
-Service hooks for [AppOptics Metrics](https://metrics.appoptics.com).
+Service hooks for [AppOptics](https://my.appoptics.com).
 
 Making a Release
 ----------------
