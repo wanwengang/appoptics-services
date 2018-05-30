@@ -7,7 +7,6 @@ module AppOptics::Services
       @endpoint = '/alerts'
       @settings = {
         api_key: 'ABC1234',
-        title: 'My Favorite Service',
         description: 'Alerts related to my favorite service'
       }
     end
@@ -54,16 +53,6 @@ module AppOptics::Services
       assert_equal(200, resp.status)
     end
 
-    def test_description_defaults_to_title
-      svc = service(:alert, @settings, tagged_alert_payload)
-      @stubs.post '/alerts' do |env|
-        assert_equal @settings[:title], env[:body][:description]
-        [200, {}, '']
-      end
-      resp = svc.receive_alert
-      assert_equal(200, resp.status)
-    end
-
     def test_alert_definition_id
       svc = service(:alert, @settings, tagged_alert_payload)
       @stubs.post '/alerts' do |env|
@@ -92,7 +81,6 @@ module AppOptics::Services
         assert_equal tagged_alert_payload[:alert][:name], bag[:alert_name]
         assert_equal tagged_alert_payload[:alert][:description], bag[:alert_description]
         assert_equal tagged_alert_payload[:alert][:runbook_url], bag[:runbook_url]
-        assert_equal @settings[:description], bag[:settings_description]
         [200, {}, '']
       end
       resp = svc.receive_alert
