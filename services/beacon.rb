@@ -2,50 +2,47 @@
 
 module AppOptics::Services
   class Service::Beacon < AppOptics::Services::Service
+    ENDPOINT = ENV['BEACON_API_ENDPOINT']
+
     def receive_validate(errors)
-      [:api_key, :service_name, :description].each do |k|
+      [:api_key, :title, :description].each do |k|
         errors[k] = "is required" if settings[k].to_s.empty?
       end
       errors.none?
     end
 
     def receive_alert_clear
-      receive_alert
     end
 
     def receive_alert
-      # raise_config_error unless receive_validate({})
-
-      beacon_payload = {}
-      [:alert, :trigger_time, :conditions, :violations].each do |whitelisted|
-        beacon_payload[whitelisted] = payload[whitelisted.to_s]
-      end
-      alert_name = payload['alert']['name']
-      description = alert_name.blank? ? settings[:description] : alert_name
-      if payload[:triggered_by_user_test]
-        description = "[Test] " + description
-      end
+      raise_config_error unless receive_validate({})
 
       body = {
-        api_key: settings[:api_key],
-        service_name: settings[:service_name],
-        description: description,
-        alert_payload: beacon_payload
+        alert_definition_id: "appoptics-#{payload[:alert][:id]}",
+        # alert_instance_id: "#{payload[:alert][:name]} + #{tags...}"
+        alert_instance_id: payload[:incident_key],
+        alert_instance_origination_time: payload[:trigger_time],
+        description: settings[:title],
+        url: alert_link(payload[:alert][:id])
       }
+      body[:description] = "[TEST] #{body[:description]}" if payload[:triggered_by_user_test]
 
-      body[:event_type] = payload[:clear] ? 'clear' : 'trigger'
-
-      body[:alert_payload][:alert_url] = alert_link(payload['alert']['id'])
-      unless payload['alert']['runbook_url'].blank?
-        body[:alert_payload][:runbook_url] = payload['alert']['runbook_url']
+      # Property bag is a JSON blob that gets stored in Beacon along with the alert
+      body[:property_bag] = {
+        settings_description: settings[:description],
+        alert_id: "#{payload[:alert][:id]}",
+        alert_name: payload[:alert][:name],
+        alert_description: payload[:alert][:description].blank? ? payload[:alert][:name] : payload[:alert][:description]
+      }
+      unless payload[:alert][:runbook_url].blank?
+        body[:property_bag][:runbook_url] = payload[:alert][:runbook_url]
       end
-      unless payload['alert']['description'].blank?
-        body[:alert_payload][:description] = payload['alert']['description']
-      end
 
-      url = "https://beacon-staging.solarwinds.com/incident"
-
-      http_post(url, body, 'Content-Type' => 'application/json')
+      headers = {
+        'Content-Type' => 'application/json',
+        'X-SWI-ALERT-API-KEY' => settings[:api_key]
+      }
+      http_post(ENDPOINT, body, headers)
     end
   end
 end

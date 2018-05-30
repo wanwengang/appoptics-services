@@ -152,7 +152,7 @@ module AppOptics
       end
 
       def sample_payload
-        @helper.sample_payload
+        @helper.sample_alert_payload
       end
 
       def raise_config_error(msg = "Invalid configuration")
