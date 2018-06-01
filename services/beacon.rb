@@ -33,9 +33,12 @@ module AppOptics::Services
         alert_name: payload[:alert][:name],
         alert_description: payload[:alert][:description].blank? ? payload[:alert][:name] : payload[:alert][:description]
       }
+
       unless payload[:alert][:runbook_url].blank?
         body[:property_bag][:runbook_url] = payload[:alert][:runbook_url]
       end
+
+      body[:property_bag][:violations] = payload[:violations].to_json
 
       headers = {
         'Content-Type' => 'application/json',

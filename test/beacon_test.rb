@@ -87,6 +87,17 @@ module AppOptics::Services
       assert_equal(200, resp.status)
     end
 
+    def test_property_bag_alert_violations
+      svc = service(:alert, @settings, tagged_alert_payload)
+      @stubs.post '/alerts' do |env|
+        bag = env[:body][:property_bag]
+        assert_equal tagged_alert_payload[:violations].to_json, bag[:violations]
+        [200, {}, '']
+      end
+      resp = svc.receive_alert
+      assert_equal(200, resp.status)
+    end
+
     def test_alert_description_blank_uses_alert_name
       payload = tagged_alert_payload.dup
       payload[:alert][:description] = "" # AO allows this to be blank
