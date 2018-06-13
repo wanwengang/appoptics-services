@@ -62,6 +62,33 @@ module AppOptics
           })
         end
 
+        def self.sample_tagged_alert_payload
+          {
+            account: "ops@example.com",
+            alert: {
+              description: "Test alert",
+              id: 7505423,
+              name: "my.test.alert",
+              runbook_url: "http://github.com",
+              version: 2
+            },
+            conditions: [
+              {id: 45174468, summary_function: "sum", threshold: 42, type: "above"}
+            ],
+            incident_key: "librato-7505423-5291457",
+            trigger_time: 1527622213,
+            triggered_by_user_test: false,
+            violations: {
+              "apiname=yourapi,awsaccount=dev" => [
+                {"condition_violated"=>45174468, "metric"=>"AWS.ApiGateway.Count", "recorded_at"=>1527621420, "value"=>43}
+              ],
+              "apiname=yourapi,awsaccount=dev,method=post,resource=/ingest,stage=dev" => [
+                {"condition_violated"=>45174468, "metric"=>"AWS.ApiGateway.Count", "recorded_at"=>1527622080, "value"=>43}
+              ]
+            }
+          }.with_indifferent_access
+        end
+
         def get_measurements(body)
           measurements = body['measurements'] || []
           measurements << body['measurement']

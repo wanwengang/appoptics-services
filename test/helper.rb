@@ -33,6 +33,10 @@ class AppOptics::Services::TestCase < Test::Unit::TestCase
     "Basic " + ["#{user}:#{pass}"].pack("m*").strip
   end
 
+  def tagged_alert_payload
+    AppOptics::Services::Helpers::AlertHelpers.sample_tagged_alert_payload
+  end
+
   def new_alert_payload
     AppOptics::Services::Helpers::AlertHelpers.sample_new_alert_payload
   end
