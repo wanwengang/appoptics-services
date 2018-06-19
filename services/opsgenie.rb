@@ -61,7 +61,6 @@ module AppOptics::Services
     end
 
     def post_it(hash, triggered_by_user_test)
-      url = "https://api.opsgenie.com/v1/json/appoptics"
       tags = settings[:tags].nil? ?  "" : settings[:tags].dup
       if triggered_by_user_test
         tags += tags.empty? ? "triggered_by_user_test" : ",triggered_by_user_test"
@@ -83,6 +82,11 @@ module AppOptics::Services
       else
         puts(msg)
       end
+    end
+
+    def url
+      hostname = settings[:hostname] || "api.opsgenie.com"
+      "https://#{hostname}/v1/json/appoptics"
     end
   end
 end
