@@ -45,7 +45,7 @@ module AppOptics::Services
       payload = new_alert_payload.dup
       local_settings = @settings.dup
       svc = service(:alert, local_settings, payload)
-      assert "https://api.opsgenie.com/v1/json/appptics", svc.url
+      assert_equal "https://api.opsgenie.com/v1/json/appoptics", svc.url
     end
 
     def test_hostname_custom
@@ -53,7 +53,7 @@ module AppOptics::Services
       local_settings = @settings.dup
       local_settings[:hostname] = "api.eu.opsgenie.com"
       svc = service(:alert, local_settings, payload)
-      assert "https://#{local_settings[:hostname]}/v1/json/appptics", svc.url
+      assert_equal "https://#{local_settings[:hostname]}/v1/json/appoptics", svc.url
     end
 
     def service(*args)
