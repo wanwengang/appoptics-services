@@ -56,6 +56,14 @@ module AppOptics::Services
       assert_equal "https://#{local_settings[:hostname]}/v1/json/appoptics", svc.url
     end
 
+    def test_hostname_invald
+      payload = new_alert_payload.dup
+      local_settings = @settings.dup
+      local_settings[:hostname] = "lol"
+      svc = service(:alert, local_settings, payload)
+      assert_raises svc.url
+    end
+
     def service(*args)
       super AppOptics::Services::Service::OpsGenie, *args
     end

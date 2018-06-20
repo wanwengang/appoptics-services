@@ -85,12 +85,16 @@ module AppOptics::Services
     end
 
     def url
-      uri = URI.parse("https://api.opsgenie.com/v1/json/appoptics")
-      if hostname = settings[:hostname]
-        uri.host = hostname
-      end
+      begin
+        uri = URI.parse("https://api.opsgenie.com/v1/json/appoptics")
+        if hostname = settings[:hostname]
+          uri.host = hostname
+        end
 
-      uri.to_s
+        uri.to_s
+      rescue StandardError => e
+        raise_config_error(e.message)
+      end
     end
   end
 end
