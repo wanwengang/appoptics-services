@@ -4,10 +4,10 @@ gem 'faraday', '~> 0.9'
 gem 'tilt',  '~> 2'
 
 gem 'yajl-ruby', '~> 1.3.1', :require => [ 'yajl', 'yajl/json_gem' ]
-gem 'activesupport', '>= 3.2', :require => 'active_support'
+gem 'activesupport', '>= 4.1.11'
 
 # service: mail
-gem 'mail', '~> 2.2'
+gem 'mail', '~> 2.5', '>= 2.5.5'
 
 # service :campfire
 gem 'tinder', '~> 1.10.1'
@@ -22,7 +22,7 @@ gem 'flowdock', '~> 0.3'
 gem 'aws-sdk-sns', '~> 1'
 
 # markdown generation
-gem 'redcarpet', '~> 2.3'
+gem 'redcarpet', '~> 3.2', '>= 3.2.3'
 
 # Ensure everyone plays nice with SSL
 #
@@ -35,7 +35,7 @@ gem 'rake', '>= 0.9'
 group :development do
   gem "test-unit", "~> 3.2.7"
   gem "rspec", "~>3.1"
-  gem "shoulda", "~> 3.5"
-  gem "jeweler", "~> 2.1"
-  gem 'yard', "~> 0.8"
+  gem "shoulda", "~> 3.5", ">= 3.5.0"
+  gem "jeweler", "~> 2.1", ">= 2.1.2"
+  gem 'yard', '~> 0.9', '>= 0.9.11'
 end
