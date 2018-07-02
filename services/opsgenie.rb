@@ -86,7 +86,7 @@ module AppOptics::Services
 
     def url
       begin
-        uri = URI.parse("https://api.opsgenie.com/v1/json/appoptics")
+        uri = URI.parse("https://api.opsgenie.com/v1/json/integrations/webhooks/appoptics")
         if hostname = settings[:hostname]
           uri.host = hostname
         end

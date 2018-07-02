@@ -4,7 +4,7 @@ module AppOptics::Services
   class OpsGenieTest < AppOptics::Services::TestCase
     def setup
       @settings = { :customer_key => "my api key" }
-      @stub_url = URI.parse("https://api.opsgenie.com/v1/json/appoptics").request_uri
+      @stub_url = URI.parse("https://api.opsgenie.com/v1/json/integrations/webhooks/appoptics").request_uri
       @stubs = Faraday::Adapter::Test::Stubs.new
     end
 
@@ -45,7 +45,7 @@ module AppOptics::Services
       payload = new_alert_payload.dup
       local_settings = @settings.dup
       svc = service(:alert, local_settings, payload)
-      assert_equal "https://api.opsgenie.com/v1/json/appoptics", svc.url
+      assert_equal "https://api.opsgenie.com/v1/json/integrations/webhooks/appoptics", svc.url
     end
 
     def test_hostname_custom
@@ -53,7 +53,7 @@ module AppOptics::Services
       local_settings = @settings.dup
       local_settings[:hostname] = "api.eu.opsgenie.com"
       svc = service(:alert, local_settings, payload)
-      assert_equal "https://#{local_settings[:hostname]}/v1/json/appoptics", svc.url
+      assert_equal "https://#{local_settings[:hostname]}/v1/json/integrations/webhooks/appoptics", svc.url
     end
 
     def test_hostname_invald
