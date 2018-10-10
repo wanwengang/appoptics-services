@@ -142,7 +142,7 @@ module AppOptics::Services
               <td align="center" valign="top">
                 <div id="headbar" style="background-color: #000000;padding: 20px;border-bottom: 0px solid #000000;">
                   <div id="headlogo">
-                    <img src="https://s3.amazonaws.com/appoptics-email/dist/img/appoptics-logo@2x.png" height="20" alt="AppOptics">
+                    <img src="https://s3.amazonaws.com/appoptics-email/dist/img/swi_appoptics@2x.png" height="20" alt="AppOptics">
                   </div>
                 </div>
               </td>
@@ -199,8 +199,8 @@ EOF
       View the metric here: <%= payload_link(payload) %>
 
       --
-      AppOptics Metrics
-      metrics@appoptics.com - https://metrics.appoptics.com/
+      AppOptics 
+      support@appoptics.com - https://www.appoptics.com/
     EOF
     end
 
