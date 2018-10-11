@@ -1,9 +1,11 @@
 AppOptics Services
 ================
 
-[![Build Status](https://secure.travis-ci.org/appoptics/appoptics-services.png)](http://travis-ci.org/appoptics/appoptics-services)
+[![CircleCI](https://circleci.com/gh/appoptics/appoptics-services/tree/master.svg?style=svg)](https://circleci.com/gh/appoptics/appoptics-services/tree/master)
 
-Service hooks for [AppOptics](https://my.appoptics.com).
+Service hooks for [AppOptics](https://my.appoptics.com). Services define the 
+actions that are taken when an alert is triggered. Learn more by reading the 
+[AppOptics API Docs](https://docs.appoptics.com/api/#retrieve-a-snapshot).
 
 Making a Release
 ----------------
@@ -58,7 +60,7 @@ Payload for a Triggered Alert
 -----------------------------
 
 A sample payload is available at
-[lib/appoptics-services/helpers/alert_helpers.rb](lib/appoptics-services/helpers/alert_helpers.rb) and listed below:
+[lib/appoptics-services/helpers/alert_helpers.rb][] and listed below:
 
 ```
 "payload" : {
@@ -175,6 +177,7 @@ can be accomplished with community involvement.
 We thank them for everything they've done for all of us.
 
 [lib/appoptics_services/app.rb]: https://github.com/appoptics/appoptics-services/blob/master/lib/appoptics_services/app.rb
+[lib/appoptics-services/helpers/alert_helpers.rb]:  https://github.com/appoptics/appoptics-services/blob/master/lib/appoptics-services/helpers/alert_helpers.rb
 [services/]: https://github.com/appoptics/appoptics-services/tree/master/services
 [test/]: https://github.com/appoptics/appoptics-services/tree/master/test
 [github-services]: https://github.com/github/github-services/
