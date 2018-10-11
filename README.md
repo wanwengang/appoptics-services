@@ -64,20 +64,44 @@ A sample payload is available at
 
 ```
 "payload" : {
-  "alert" : {
-    "name" : "Alert name or nil",
-    "id" : 12345,
-  },
-  "incident_key": "<key that uniquely identifies this alert incident>",
-  "metric" : {
-     "name" : "Name of the metric that tripped alert",
-     "type" : "gauge" or "counter",
-  },
-  "measurements" : [{
-     "value" : 4.5 (value that caused exception),
-     "source" : "r3.acme.com" (source that caused exception
-                               or "unassigned")
-  }]
+{
+    "alert": {
+        "id": 7687374,
+        "name": "test.alert.name",
+        "runbook_url": "",
+        "version": 2,
+        "description": "The description of the alert"
+    },
+    "account": "youremail@yourdomain.com",
+    "trigger_time": 1539199059,
+    "incident_key": "appoptics-<alert id>-<incident id (internal)>",
+    "conditions": [
+        {
+            "id": 51960403,
+            "type": "above",
+            "threshold": 0,
+            "summary_function": "sum"
+        }
+    ],
+    "violations": {
+        "az=b": [
+            {
+                "metric": "AWS.ELB.RequestCount",
+                "value": 1181106,
+                "recorded_at": 1539198960,
+                "condition_violated": 51960403
+            }
+        ],
+        "az=c": [
+            {
+                "metric": "AWS.ELB.RequestCount",
+                "value": 1,
+                "recorded_at": 1539198840,
+                "condition_violated": 51960403
+            }
+        ]
+    },
+    "triggered_by_user_test": false
 }
 ```
 
@@ -86,17 +110,17 @@ Payload for a Cleared Alert
 
 ```
 "payload": {
-   "alert":{
-      "id":6268092,
-      "name":"a.test.name",
-      "runbook_url":"",
-      "version":2
-   },
-   "incident_key": "<key that uniquely identifies this alert incident>",
-   "account":"youremail@yourdomain.com",
-   "trigger_time":1457040045,
-   "clear":"normal"
-   }
+    "alert": {
+        "id": 7687374,
+        "name": "test.alert.name",
+        "runbook_url": "",
+        "version": 2,
+        "description": "The description of the alert"
+    },
+    "account": "youremail@yourdomain.com",
+    "trigger_time": 1539199160,
+    "clear": "normal",
+    "incident_key": "appoptics-<alert id>-<incident id (internal)>"
 }
 ```
 
