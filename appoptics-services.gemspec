@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "appoptics-services"
-  s.version = "4.1.3"
+  s.version = "4.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Mike Heffner"]
-  s.date = "2018-07-02"
+  s.date = "2019-05-03"
   s.description = "Provides service notifications for alerts"
   s.email = "mike@appoptics.com"
   s.extra_rdoc_files = [
@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
     "README.md"
   ]
   s.files = [
+    ".circleci/config.yml",
     ".document",
     ".ruby-version",
     "Gemfile",
@@ -27,7 +28,6 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "appoptics-services.gemspec",
-    "circle.yml",
     "config.ru",
     "dot.rvmrc",
     "lib/appoptics-services.rb",
