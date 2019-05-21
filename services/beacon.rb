@@ -23,7 +23,7 @@ module AppOptics::Services
         alert_instance_id: payload[:incident_key],
         alert_instance_origination_time: payload[:trigger_time],
         description: settings[:description],
-        url: alert_link(payload[:alert][:id])
+        url: alert_link(payload.with_indifferent_access)
       }
       body[:description] = "[TEST] #{body[:description]}" if payload[:triggered_by_user_test]
 

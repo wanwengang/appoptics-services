@@ -4,6 +4,7 @@ class AppOptics::Services::OutputTestCase < AppOptics::Services::TestCase
   ENV['APPOPTICS_APP_URL'] = 'metrics.appoptics.com'
   def test_clear
     payload = {
+      user_id: 1,
       alert: {id: 123, name: "Some alert name", version: 2},
       settings: {},
       service_type: "campfire",
@@ -15,13 +16,14 @@ class AppOptics::Services::OutputTestCase < AppOptics::Services::TestCase
     expected = <<EOF
 # Alert Some alert name has cleared at 1970-05-23 14:32:03 UTC
 
-Link: https://metrics.appoptics.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/1/details/123
 EOF
     assert_equal(expected, output.markdown)
   end
 
   def test_clear_auto
     payload = {
+      user_id: 1,
       alert: {id: 123, name: "Some alert name", version: 2},
       settings: {},
       service_type: "campfire",
@@ -33,13 +35,14 @@ EOF
     expected = <<EOF
 # Alert Some alert name was automatically cleared at 1970-05-23 14:32:03 UTC
 
-Link: https://metrics.appoptics.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/1/details/123
 EOF
     assert_equal(expected, output.markdown)
   end
 
   def test_clear_manual
     payload = {
+      user_id: 1,
       alert: {id: 123, name: "Some alert name", version: 2},
       settings: {},
       service_type: "campfire",
@@ -51,13 +54,14 @@ EOF
     expected = <<EOF
 # Alert Some alert name was manually cleared at 1970-05-23 14:32:03 UTC
 
-Link: https://metrics.appoptics.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/1/details/123
 EOF
     assert_equal(expected, output.markdown)
   end
 
   def test_clear_unknown
     payload = {
+      user_id: 1,
       alert: {id: 123, name: "Some alert name", version: 2},
       settings: {},
       service_type: "campfire",
@@ -70,7 +74,7 @@ EOF
     expected = <<EOF
 # Alert Some alert name has cleared at 1970-05-23 14:32:03 UTC
 
-Link: https://metrics.appoptics.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/1/details/123
 EOF
     assert_equal(expected, output.markdown)
   end
@@ -78,6 +82,7 @@ EOF
   # use decimals in threshold and value to test the formatting of decimal places
   def test_simple_alert
     payload = {
+      user_id: 1,
       alert: {id: 123, name: "Some alert name", version: 2},
       settings: {},
       service_type: "campfire",
@@ -96,7 +101,7 @@ EOF
     expected = <<EOF
 # Alert Some alert name has triggered!
 
-Link: https://metrics.appoptics.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/1/details/123
 
 Source `foo.bar`:
 * metric `metric.name` was above threshold 10.5 with value 100.123 recorded at Fri, Jan 10 2014 at 21:58:03 UTC
@@ -106,6 +111,7 @@ EOF
 
   def test_alert_triggered_by_user
     payload = {
+      user_id: 1,
       alert: {id: 123, name: "Some alert name", version: 2},
       settings: {},
       service_type: "campfire",
@@ -129,6 +135,7 @@ EOF
 
   def test_complex_alert
     payload = {
+      user_id: 1,
       alert: {id: 123, name: "Some alert name", version: 2},
       settings: {},
       service_type: "campfire",
@@ -159,7 +166,7 @@ EOF
     expected = <<EOF
 # Alert Some alert name has triggered!
 
-Link: https://metrics.appoptics.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/1/details/123
 
 Source `foo.bar`:
 * metric `metric.name` was above threshold 10 with value 100 recorded at Fri, Jan 10 2014 at 21:58:03 UTC
@@ -205,6 +212,7 @@ EOF
 
   def test_windowed_alert
     payload = {
+        user_id: 1,
         alert: {id: 123, name: "Some alert name", version: 2},
         settings: {},
         service_type: "campfire",
@@ -223,7 +231,7 @@ EOF
     expected = <<EOF
 # Alert Some alert name has triggered!
 
-Link: https://metrics.appoptics.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/1/details/123
 
 Source `foo.bar`:
 * metric `metric.name` was above threshold 10 over 90 seconds with value 100 recorded at Fri, Jan 10 2014 at 21:56:33 UTC
@@ -233,6 +241,7 @@ EOF
 
   def test_runbook_url
     payload = {
+        user_id: 1,
         alert: {id: 123, name: "Some alert name", version: 2, runbook_url: "http://example.com/"},
         settings: {},
         service_type: "campfire",
@@ -251,7 +260,7 @@ EOF
     expected = <<EOF
 # Alert Some alert name has triggered!
 
-Link: https://metrics.appoptics.com/alerts/123
+Link: https://metrics.appoptics.com/alerts/1/details/123
 
 Source `foo.bar`:
 * metric `metric.name` was above threshold 10 with value 100 recorded at Fri, Jan 10 2014 at 21:58:03 UTC

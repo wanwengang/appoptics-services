@@ -120,8 +120,10 @@ module AppOptics
           "https://#{ENV['APPOPTICS_APP_URL']}/metrics/#{name}"
         end
 
-        def alert_link(id)
-          "https://#{ENV['APPOPTICS_APP_URL']}/alerts/#{id}"
+        def alert_link(payload)
+          alert_id = payload['alert']['id']
+          org_id = payload['user_id']
+          "https://#{ENV['APPOPTICS_APP_URL']}/alerts/#{org_id}/details/#{alert_id}"
         end
 
         # TODO: fix for specific alert id?

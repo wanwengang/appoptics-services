@@ -29,11 +29,11 @@ module AppOptics::Services
       if data.clear
         text = case data.clear
                when "manual"
-                 "Alert <#{alert_link(data.alert[:id])}|#{data.alert[:name]}> was manually cleared at #{trigger_time_utc}"
+                 "Alert <#{data.alert_url}|#{data.alert[:name]}> was manually cleared at #{trigger_time_utc}"
                when "auto"
-                 "Alert <#{alert_link(data.alert[:id])}|#{data.alert[:name]}> was automatically cleared at #{trigger_time_utc}"
+                 "Alert <#{data.alert_url}|#{data.alert[:name]}> was automatically cleared at #{trigger_time_utc}"
                else
-                 "Alert <#{alert_link(data.alert[:id])}|#{data.alert[:name]}> has cleared at #{trigger_time_utc}"
+                 "Alert <#{data.alert_url}|#{data.alert[:name]}> has cleared at #{trigger_time_utc}"
                end
         fallback = case data.clear
                    when "manual"
@@ -57,7 +57,7 @@ module AppOptics::Services
         if payload[:triggered_by_user_test]
           pretext << "#{test_alert_message()}\n\n"
         end
-        pretext << "Alert <#{alert_link(data.alert[:id])}|#{data.alert[:name]}> has triggered!"
+        pretext << "Alert <#{data.alert_url}|#{data.alert[:name]}> has triggered!"
         unless runbook_url.blank?
           pretext << " <#{runbook_url}|Runbook>"
         end
@@ -89,9 +89,9 @@ module AppOptics::Services
     end
 
     def format_fallback(data)
-      data.markdown.sub(/^#\s+/, '').                 # no leading #
-        gsub('`', '\'').                              # no backticks
-        chomp + " • #{alert_link(data.alert[:id])}\n" # add the alert link
+      data.markdown.sub(/^#\s+/, '').     # no leading #
+        gsub('`', '\'').                  # no backticks
+        chomp + " • #{data.alert_url}\n"  # add the alert link
     end
 
     def raise_url_error
