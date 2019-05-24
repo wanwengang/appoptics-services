@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Mike Heffner".freeze]
-  s.date = "2019-05-20"
+  s.date = "2019-05-24"
   s.description = "Provides service notifications for alerts".freeze
   s.email = "mike@appoptics.com".freeze
   s.extra_rdoc_files = [
@@ -39,7 +39,6 @@ Gem::Specification.new do |s|
     "lib/appoptics-services/numbers.rb",
     "lib/appoptics-services/output.rb",
     "lib/appoptics-services/service.rb",
-    "services/beacon.rb",
     "services/big_panda.rb",
     "services/campfire.rb",
     "services/flowdock.rb",
@@ -53,7 +52,6 @@ Gem::Specification.new do |s|
     "services/victorops.rb",
     "services/webhook.rb",
     "services/zapier.rb",
-    "test/beacon_test.rb",
     "test/big_panda_test.rb",
     "test/campfire_test.rb",
     "test/clearing_test.rb",
