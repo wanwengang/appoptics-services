@@ -55,7 +55,7 @@ module AppOptics::Services
         attachment = payload["attachments"][0]
         assert_equal(["color", "fallback", "text"], attachment.keys.sort)
         assert_nil(payload["text"])
-        assert_equal "Alert <https://metrics.appoptics.com/alerts/123|Some alert name> has cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
+        assert_equal "Alert <https://metrics.appoptics.com/alerts/1/details/123|Some alert name> has cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
         assert_equal "Alert 'Some alert name' has cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["fallback"]
         [200, {}, '']
       end
@@ -73,7 +73,7 @@ module AppOptics::Services
         attachment = payload["attachments"][0]
         assert_equal(["color", "fallback", "text"], attachment.keys.sort)
         assert_nil(payload["text"])
-        assert_equal "Alert <https://metrics.appoptics.com/alerts/123|Some alert name> has cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
+        assert_equal "Alert <https://metrics.appoptics.com/alerts/1/details/123|Some alert name> has cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
         assert_equal "Alert 'Some alert name' has cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["fallback"]
         [200, {}, '']
       end
@@ -91,7 +91,7 @@ module AppOptics::Services
         attachment = payload["attachments"][0]
         assert_equal(["color", "fallback", "text"], attachment.keys.sort)
         assert_nil(payload["text"])
-        assert_equal "Alert <https://metrics.appoptics.com/alerts/123|Some alert name> was manually cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
+        assert_equal "Alert <https://metrics.appoptics.com/alerts/1/details/123|Some alert name> was manually cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
         assert_equal "Alert 'Some alert name' was manually cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["fallback"]
         [200, {}, '']
       end
@@ -109,7 +109,7 @@ module AppOptics::Services
         attachment = payload["attachments"][0]
         assert_equal(["color", "fallback", "text"], attachment.keys.sort)
         assert_nil(payload["text"])
-        assert_equal "Alert <https://metrics.appoptics.com/alerts/123|Some alert name> was automatically cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
+        assert_equal "Alert <https://metrics.appoptics.com/alerts/1/details/123|Some alert name> was automatically cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["text"]
         assert_equal "Alert 'Some alert name' was automatically cleared at Sat, May 23 1970 at 14:32:03 UTC", attachment["fallback"]
         [200, {}, '']
       end
